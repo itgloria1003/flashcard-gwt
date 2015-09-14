@@ -1,0 +1,3 @@
+# Module flashcardgwt
+# RPC service class, partial path of RPC policy file
+it.gloria.client.GreetingService, 0A48C8F0ACDDBC3AB87DB6E0AF134363.gwt.rpc

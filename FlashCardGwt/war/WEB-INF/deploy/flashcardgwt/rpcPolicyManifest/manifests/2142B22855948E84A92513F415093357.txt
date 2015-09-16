@@ -1,2 +1,0 @@
-serviceClass: it.gloria.client.GreetingService
-path: 0A48C8F0ACDDBC3AB87DB6E0AF134363.gwt.rpc

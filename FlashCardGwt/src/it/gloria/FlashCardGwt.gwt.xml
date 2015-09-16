@@ -20,6 +20,8 @@
   
   <!-- Inherit the GWT-Cropper -->
   <inherits name='com.google.code.gwt.crop.GWTCropper'/>
+  <inherits name="com.github.gwtbootstrap.Bootstrap" />
+  
 
   <!-- Other module inherits                                      -->
 

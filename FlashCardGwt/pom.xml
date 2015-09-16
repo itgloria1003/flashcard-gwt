@@ -31,5 +31,14 @@
   		<artifactId>gwt-crop</artifactId>
   		<version>0.5.5</version>
   	</dependency>
+  		<dependency>
+  		<groupId>com.github.gwtbootstrap</groupId>
+  		<artifactId>gwt-bootstrap</artifactId>
+  		<version>2.3.2.0</version>
+  	</dependency>
+  
   </dependencies>
+  
+  
+  
 </project>

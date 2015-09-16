@@ -16,6 +16,12 @@
   <!-- <inherits name='com.google.gwt.user.theme.standard.Standard'/> -->
   <!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/> -->
   <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->
+  
+  
+  <!-- Inherit the GWT-Cropper -->
+  <inherits name='com.google.code.gwt.crop.GWTCropper'/>
+  <inherits name="com.github.gwtbootstrap.Bootstrap" />
+  
 
   <!-- Other module inherits                                      -->
 

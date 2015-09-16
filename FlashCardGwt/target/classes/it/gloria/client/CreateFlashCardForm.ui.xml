@@ -1,0 +1,40 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:com.github.gwtbootstrap.client.ui"
+	xmlns:d="urn:import:com.github.gwtbootstrap.datepicker.client.ui">
+	<ui:style>
+	</ui:style>
+	<g:HTMLPanel>
+		<b:Modal ui:field="modalWindow" title="Create a flash Card">
+			<b:FluidRow>
+				<b:Column size="12">
+					<b:Form type="HORIZONTAL" action="//gwtbootstrap.github.com"
+						ui:field="createForm">
+						<b:Fieldset>
+							<b:Legend>
+								<small>* is required</small>
+							</b:Legend>
+							<b:Label ui:field="title"></b:Label>
+							<b:ControlGroup ui:field="engCaptionControlGroup">
+								<b:ControlLabel for="engCaption">
+									<font color="red">*</font>
+									User Name
+								</b:ControlLabel>
+								<b:Controls>
+									<b:TextBox b:id="engCaption" ui:field="engCaption"
+										placeholder="input user name" />
+									<b:HelpInline ui:field="engCaptionHelp" />
+								</b:Controls>
+							</b:ControlGroup>
+							<b:FormActions>
+								<b:SubmitButton type="PRIMARY" ui:field="saveButton">Save
+									changes</b:SubmitButton>
+								<b:Button ui:field="resetButton">Cancel</b:Button>
+							</b:FormActions>
+						</b:Fieldset>
+					</b:Form>
+				</b:Column>
+			</b:FluidRow>
+		</b:Modal>
+	</g:HTMLPanel>
+</ui:UiBinder>

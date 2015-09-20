@@ -3,10 +3,13 @@ package it.gloria.client;
 
 
 import com.github.gwtbootstrap.client.ui.Button;
+import com.github.gwtbootstrap.client.ui.Modal;
 import com.github.gwtbootstrap.client.ui.constants.IconType;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 
@@ -15,6 +18,10 @@ import com.google.gwt.user.client.ui.RootPanel;
  */
 public class FlashCardGwt implements EntryPoint {
 
+	@UiField
+    FlowPanel sections;
+	
+	
 	/**
 	 * This is the entry point method.
 	 */
@@ -22,6 +29,8 @@ public class FlashCardGwt implements EntryPoint {
 
 		HorizontalPanel hp = new HorizontalPanel();
         hp.setSpacing(20);
+		final Modal modal = new Modal(true);
+        modal.add(new CreateFlashCardForm());
 //         
 //        
 //        GWTCropper cropper = new GWTCropper("Gloria_kinkin.jpg");
@@ -40,7 +49,7 @@ public class FlashCardGwt implements EntryPoint {
         createButton.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				newFlashCardForm.show();		
+				modal .show();		
 				
 			}
 		});

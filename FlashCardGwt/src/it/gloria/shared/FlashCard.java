@@ -1,7 +1,8 @@
 package it.gloria.shared;
 
+import java.io.Serializable;
 
-public class FlashCard {
+public class FlashCard  implements Serializable{
 	public static final String FLASH_CARD = "FlashCard";
 	private String chinCaption;
 	private String engCaption;
@@ -42,6 +43,7 @@ public class FlashCard {
 	public void setBlobKey(String blobKey) {
 		this.blobKey = blobKey;
 	}
+
 
 
 

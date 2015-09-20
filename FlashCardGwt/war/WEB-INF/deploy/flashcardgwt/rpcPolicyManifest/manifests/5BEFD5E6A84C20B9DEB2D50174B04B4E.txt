@@ -1,0 +1,2 @@
+serviceClass: it.gloria.client.FlashCardService
+path: FD00531BE30F2D934D5EAFF901A6B1D6.gwt.rpc

@@ -16,6 +16,7 @@ import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 import com.google.appengine.api.images.ImagesService;
 import com.google.appengine.api.images.ImagesServiceFactory;
 
+
 @SuppressWarnings("serial")
 public class UploadServlet extends HttpServlet {
 	private static final Logger log = Logger.getLogger(UploadServlet.class
@@ -29,7 +30,7 @@ public class UploadServlet extends HttpServlet {
 
 		// // checks if the request actually contains upload file
 		Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(request);
-		List<BlobKey> blobKeys = blobs.get("myFile");
+		List<BlobKey> blobKeys = blobs.get("uploadFile");
 		FlashCardDao dao = new FlashCardDao();
 		if (blobKeys == null || blobKeys.isEmpty()) {
 			response.sendRedirect("/");
@@ -40,24 +41,14 @@ public class UploadServlet extends HttpServlet {
 			// save the record
 			dao.createFile(uploadBlobKey);
 			ImagesService imagesService = ImagesServiceFactory
-                    .getImagesService();
- 
-            response.sendRedirect("/upload?key=" + uploadBlobKey.getKeyString());
+					.getImagesService();
+
+			response.setHeader("Content-Type", "text/html");
+
+			response.getWriter().println(uploadBlobKey.getKeyString());
 
 		}
+
 	}
-	@Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
- 
-        String imageUrl = req.getParameter("key");
-        resp.setHeader("Content-Type", "text/html");
- 
-        // This is a bit hacky, but it'll work. We'll use this key in an Async
-        // service to
-        // fetch the image and image information
-        resp.getWriter().println(imageUrl);
- 
-    }
 
 }

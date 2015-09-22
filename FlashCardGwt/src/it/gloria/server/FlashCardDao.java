@@ -35,18 +35,14 @@ public class FlashCardDao{
 		return c;
 
 	}
-	public void createFile(BlobKey uploadBlobKey){
+	public String createFile(FlashCard card){
 			// save the record
 			Transaction beginTransaction = datastoreService.beginTransaction();
-			FlashCard card = new FlashCard();
-			card.setBlobKey(uploadBlobKey.getKeyString());
-			datastoreService.put(beginTransaction, card.toEntity());
+			Key put = datastoreService.put(beginTransaction, toEntity(card));
 			beginTransaction.commit();
+			return put.getAppId();
+			
 	}
 	
-	public String update(FlashCard card){
-		System.out.print("update");
-		return card.getEngCaption();
-	}
 	
 }

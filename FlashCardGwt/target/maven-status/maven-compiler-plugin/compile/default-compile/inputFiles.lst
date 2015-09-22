@@ -1,5 +1,10 @@
-D:\work_gloria\workspace\FlashCardGwt\src\it\gloria\shared\FieldVerifier.java
-D:\work_gloria\workspace\FlashCardGwt\src\it\gloria\server\GreetingServiceImpl.java
-D:\work_gloria\workspace\FlashCardGwt\src\it\gloria\client\GreetingService.java
-D:\work_gloria\workspace\FlashCardGwt\src\it\gloria\client\GreetingServiceAsync.java
-D:\work_gloria\workspace\FlashCardGwt\src\it\gloria\client\FlashCardGwt.java
+D:\work_gloria\git_repository\flashcard-gwt\FlashCardGwt\src\it\gloria\shared\FlashCardVerifier.java
+D:\work_gloria\git_repository\flashcard-gwt\FlashCardGwt\src\it\gloria\client\FlashCardGwt.java
+D:\work_gloria\git_repository\flashcard-gwt\FlashCardGwt\src\it\gloria\shared\ValidationMessage.java
+D:\work_gloria\git_repository\flashcard-gwt\FlashCardGwt\src\it\gloria\server\FlashCardServiceImpl.java
+D:\work_gloria\git_repository\flashcard-gwt\FlashCardGwt\src\it\gloria\server\UploadServlet.java
+D:\work_gloria\git_repository\flashcard-gwt\FlashCardGwt\src\it\gloria\client\CreateFlashCardForm.java
+D:\work_gloria\git_repository\flashcard-gwt\FlashCardGwt\src\it\gloria\shared\FlashCard.java
+D:\work_gloria\git_repository\flashcard-gwt\FlashCardGwt\src\it\gloria\server\FlashCardDao.java
+D:\work_gloria\git_repository\flashcard-gwt\FlashCardGwt\src\it\gloria\client\FlashCardService.java
+D:\work_gloria\git_repository\flashcard-gwt\FlashCardGwt\src\it\gloria\client\FlashCardServiceAsync.java

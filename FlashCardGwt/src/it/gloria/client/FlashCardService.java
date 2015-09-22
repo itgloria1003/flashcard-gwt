@@ -10,6 +10,6 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
  */
 @RemoteServiceRelativePath("flashCard")
 public interface FlashCardService extends RemoteService {
-	String updateFlashCardDetails(FlashCard card) throws IllegalArgumentException;
+	String createCard(FlashCard card) throws IllegalArgumentException;
 	public String getBlobstoreUploadUrl();
 }

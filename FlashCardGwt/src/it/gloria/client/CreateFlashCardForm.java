@@ -101,15 +101,17 @@ public class CreateFlashCardForm extends Composite implements Editor<FlashCard> 
 			@Override
 			public void onSubmitComplete(SubmitCompleteEvent event) {
 				FlashCard card = driver.flush();
-				flashCardService.updateFlashCardDetails(card,
+				card.setBlobKey(event.getResults());
+//				Window.alert("Record Save!"+ event.getResults());
+				flashCardService.createCard(card,
 						new AsyncCallback<String>() {
 
 							@Override
 							public void onSuccess(String result) {
+								
+								Window.alert("Record Save, key="+ result);
 								createForm.reset();
 								startNewBlobstoreSession();
-								Window.alert("Result from server:"+ result);
-
 							}
 
 							@Override
@@ -138,12 +140,12 @@ public class CreateFlashCardForm extends Composite implements Editor<FlashCard> 
 
 	private void startNewBlobstoreSession() {
 		flashCardService.getBlobstoreUploadUrl(new AsyncCallback<String>() {
-
 			@Override
 			public void onSuccess(String result) {
+//				Window.alert("url" + result);
 				createForm.setAction(result);
 				uploadFile.setEnabled(true);
-
+				uploadFile.setName("imageFile");
 			}
 
 			@Override

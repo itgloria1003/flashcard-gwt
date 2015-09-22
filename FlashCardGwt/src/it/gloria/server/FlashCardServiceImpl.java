@@ -1,5 +1,7 @@
 package it.gloria.server;
 
+import java.net.URL;
+
 import it.gloria.client.FlashCardService;
 import it.gloria.shared.FlashCard;
 
@@ -15,17 +17,20 @@ public class FlashCardServiceImpl extends RemoteServiceServlet implements
 		FlashCardService {
 
 	@Override
-	public String updateFlashCardDetails(FlashCard card)
+	public String createCard(FlashCard card)
 			throws IllegalArgumentException {
 		FlashCardDao dao = new FlashCardDao();
-		return dao.update(card);
+		return dao.createFile(card);
 	}
 
 	@Override
 	public String getBlobstoreUploadUrl() {
 		BlobstoreService blobstoreService = BlobstoreServiceFactory
 				.getBlobstoreService();
-		return blobstoreService.createUploadUrl("/upload");
+		String url = blobstoreService.createUploadUrl("/upload");
+		System.out.print(url.replaceAll("ivantai", "localhost"));
+		url = url.replaceAll("IvanTai", "localhost");
+		return url ; 
 
 	}
 

@@ -7,7 +7,7 @@
 	</ui:style>
 
 	<g:HTMLPanel>
-		<b:Form type="VERTICAL" ui:field="createForm">
+		<b:Form type="HORIZONTAL" ui:field="createForm">
 			<b:Fieldset>
 				<b:Legend>
 					<small>* is required???</small>
@@ -16,11 +16,10 @@
 				<b:ControlGroup ui:field="engCaptionControlGroup">
 					<b:ControlLabel for="engCaption">
 						<font color="red">*</font>
-						User Name
+						English Caption
 					</b:ControlLabel>
 					<b:Controls>
-						<b:TextBox b:id="engCaption" ui:field="engCaption"
-							placeholder="input user name" />
+						<b:TextBox b:id="engCaption" ui:field="engCaption" />
 						<b:HelpInline ui:field="engCaptionHelp" />
 					</b:Controls>
 				</b:ControlGroup>

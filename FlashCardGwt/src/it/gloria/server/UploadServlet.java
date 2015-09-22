@@ -13,9 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.appengine.api.blobstore.BlobKey;
 import com.google.appengine.api.blobstore.BlobstoreService;
 import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
-import com.google.appengine.api.images.ImagesService;
-import com.google.appengine.api.images.ImagesServiceFactory;
-
 
 @SuppressWarnings("serial")
 public class UploadServlet extends HttpServlet {
@@ -30,25 +27,21 @@ public class UploadServlet extends HttpServlet {
 
 		// // checks if the request actually contains upload file
 		Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(request);
-		List<BlobKey> blobKeys = blobs.get("uploadFile");
-		FlashCardDao dao = new FlashCardDao();
+		List<BlobKey> blobKeys = blobs.get("imageFile");
 		if (blobKeys == null || blobKeys.isEmpty()) {
 			response.sendRedirect("/");
 		} else {
 			// parse Object
 			BlobKey uploadBlobKey = blobKeys.get(0);
 
-			// save the record
-			dao.createFile(uploadBlobKey);
-			ImagesService imagesService = ImagesServiceFactory
-					.getImagesService();
-
-			response.setHeader("Content-Type", "text/html");
-
-			response.getWriter().println(uploadBlobKey.getKeyString());
-
+			response.setContentType("text/html");
+			response.setHeader("Pragma", "No-cache");
+			response.setDateHeader("Expires", 0);
+			response.setHeader("Cache-Control", "no-cache");
+			response.getWriter().write(uploadBlobKey.getKeyString());
 		}
-
 	}
+
+
 
 }

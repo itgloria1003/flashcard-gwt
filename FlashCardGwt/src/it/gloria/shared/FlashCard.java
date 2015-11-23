@@ -3,7 +3,18 @@ package it.gloria.shared;
 import java.io.Serializable;
 
 public class FlashCard  implements Serializable{
-	public static final String FLASH_CARD = "FlashCard";
+	private long idKey;
+
+
+	public long getIdKey() {
+		return idKey;
+	}
+
+
+	public void setIdKey(long idKey) {
+		this.idKey = idKey;
+	}
+
 	private String chinCaption;
 	private String engCaption;
 	private String blobKey;

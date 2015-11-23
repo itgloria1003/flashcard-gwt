@@ -1,5 +1,7 @@
 package it.gloria.client;
 
+import java.util.ArrayList;
+
 import it.gloria.shared.FlashCard;
 
 import com.google.gwt.user.client.rpc.RemoteService;
@@ -12,4 +14,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 public interface FlashCardService extends RemoteService {
 	String createCard(FlashCard card) throws IllegalArgumentException;
 	public String getBlobstoreUploadUrl();
+	public ArrayList<FlashCard> listFlashCards();
+	String deleteCard(FlashCard card);
+	
 }

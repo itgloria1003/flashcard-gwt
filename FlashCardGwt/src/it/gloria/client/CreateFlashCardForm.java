@@ -7,6 +7,7 @@ import it.gloria.shared.ValidationMessage.MessageType;
 
 import com.github.gwtbootstrap.client.ui.Button;
 import com.github.gwtbootstrap.client.ui.ControlGroup;
+import com.github.gwtbootstrap.client.ui.ControlLabel;
 import com.github.gwtbootstrap.client.ui.FileUpload;
 import com.github.gwtbootstrap.client.ui.Form;
 import com.github.gwtbootstrap.client.ui.Form.SubmitCompleteEvent;
@@ -21,6 +22,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.editor.client.Editor;
 import com.google.gwt.editor.client.SimpleBeanEditorDriver;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -35,6 +37,18 @@ public class CreateFlashCardForm extends Composite implements Editor<FlashCard> 
 	interface CreateFlashCardFormUiBinder extends
 			UiBinder<Widget, CreateFlashCardForm> {
 	}
+	
+	FlashCardGwt flashCardGwt;
+
+	public FlashCardGwt getFlashCardGwt() {
+		return flashCardGwt;
+	}
+
+	public void setFlashCardGwt(FlashCardGwt flashCardGwt) {
+		this.flashCardGwt = flashCardGwt;
+	}
+
+
 
 	FlashCardServiceAsync flashCardService = GWT.create(FlashCardService.class);
 
@@ -63,9 +77,14 @@ public class CreateFlashCardForm extends Composite implements Editor<FlashCard> 
 
 	@UiField
 	TextBox engCaption;
+	
+
+	@UiField
+	TextBox chinCaption;
 
 	@UiField
 	ControlGroup engCaptionControlGroup;
+	
 
 	@UiField
 	@Editor.Ignore
@@ -88,11 +107,13 @@ public class CreateFlashCardForm extends Composite implements Editor<FlashCard> 
 				// Update the object being edited with the current state of the Editor.
 				FlashCard card = driver.flush();
 				ValidationMessage validateEngDesc = FlashCardVerifier
-						.validateEngDesc(card.getEngCaption());
+						.isEmpty(card.getEngCaption(), "Eng Caption");
 				if (validateEngDesc.getType() == MessageType.ERROR) {
 					engCaptionHelp.setText(validateEngDesc.getMessage());
 					engCaptionControlGroup.setType(ControlGroupType.ERROR);
+					event.cancel();
 				}
+				
 				;
 			}
 		});
@@ -102,16 +123,16 @@ public class CreateFlashCardForm extends Composite implements Editor<FlashCard> 
 			public void onSubmitComplete(SubmitCompleteEvent event) {
 				FlashCard card = driver.flush();
 				card.setBlobKey(event.getResults());
-//				Window.alert("Record Save!"+ event.getResults());
+//				Window.alert("blobkey"+ event.getResults());
 				flashCardService.createCard(card,
 						new AsyncCallback<String>() {
 
 							@Override
 							public void onSuccess(String result) {
-								
-								Window.alert("Record Save, key="+ result);
-								createForm.reset();
+								Window.alert("Record Save!");
+								createForm.reset();								
 								startNewBlobstoreSession();
+								flashCardGwt.refresh();
 							}
 
 							@Override

@@ -15,6 +15,17 @@
 		<servlet-name>UploadServlet</servlet-name>
 		<url-pattern>/upload</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>ServeServlet</display-name>
+		<servlet-name>ServeServlet</servlet-name>
+		<servlet-class>it.gloria.server.ServeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ServeServlet</servlet-name>
+		<url-pattern>/serve</url-pattern>
+	</servlet-mapping>
+	
 
   <!-- Servlets -->
   <servlet>

@@ -10,17 +10,26 @@
 		<b:Form type="HORIZONTAL" ui:field="createForm">
 			<b:Fieldset>
 				<b:Legend>
-					<small>* is required???</small>
+					<small>* - Manadatory</small>
 				</b:Legend>
 				<b:Label ui:field="title"></b:Label>
 				<b:ControlGroup ui:field="engCaptionControlGroup">
-					<b:ControlLabel for="engCaption">
+					<b:ControlLabel for="engCaption" >
 						<font color="red">*</font>
 						English Caption
 					</b:ControlLabel>
 					<b:Controls>
 						<b:TextBox b:id="engCaption" ui:field="engCaption" />
 						<b:HelpInline ui:field="engCaptionHelp" />
+					</b:Controls>
+				</b:ControlGroup>
+				<b:ControlGroup ui:field="chinCaptionControlGroup">
+					<b:ControlLabel for="chinCaption">
+						Chinese Caption
+					</b:ControlLabel>
+					<b:Controls>
+						<b:TextBox b:id="chinCaption" ui:field="chinCaption" />
+						<b:HelpInline ui:field="chinCaptionHelp" />
 					</b:Controls>
 				</b:ControlGroup>
 				<b:ControlGroup ui:field="uploadFileControlGroup">

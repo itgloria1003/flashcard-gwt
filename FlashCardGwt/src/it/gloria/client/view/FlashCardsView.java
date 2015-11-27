@@ -1,5 +1,8 @@
 package it.gloria.client.view;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.Button;
@@ -8,21 +11,17 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DecoratorPanel;
 import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.FlexTable;
-import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.HTMLTable;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.google.gwt.sample.contacts.client.presenter.ContactsPresenter;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class ContactsView extends Composite implements ContactsPresenter.Display {
+public class FlashCardsView extends Composite implements flash {
   private final Button addButton;
   private final Button deleteButton;
   private FlexTable contactsTable;
   private final FlexTable contentTable;
   
-  public ContactsView() {
+  public FlashCardsView() {
     DecoratorPanel contentTableDecorator = new DecoratorPanel();
     initWidget(contentTableDecorator);
     contentTableDecorator.setWidth("100%");

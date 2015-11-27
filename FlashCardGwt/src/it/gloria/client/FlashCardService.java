@@ -16,5 +16,7 @@ public interface FlashCardService extends RemoteService {
 	public String getBlobstoreUploadUrl();
 	public ArrayList<FlashCard> listFlashCards();
 	String deleteCard(FlashCard card);
+	ArrayList<FlashCard> deleteFlashCards(ArrayList<Long> ids);
+	FlashCard updateFlashCard(FlashCard flashCard);
 	
 }

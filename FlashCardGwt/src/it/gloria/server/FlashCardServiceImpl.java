@@ -3,8 +3,6 @@ package it.gloria.server;
 import it.gloria.client.FlashCardService;
 import it.gloria.shared.FlashCard;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 
 import com.google.appengine.api.blobstore.BlobKey;
@@ -64,6 +62,18 @@ public class FlashCardServiceImpl extends RemoteServiceServlet implements
 	public String deleteCard(FlashCard card) {
 		long i = dao.deleteByKey(card);
 		return "deleted! " + i;
+	}
+
+	@Override
+	public ArrayList<FlashCard> deleteFlashCards(ArrayList<Long> ids) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public FlashCard updateFlashCard(FlashCard flashCard) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

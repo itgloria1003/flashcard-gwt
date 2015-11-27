@@ -1,5 +1,13 @@
 package it.gloria.client.presenter;
 
+import it.gloria.client.FlashCardServiceAsync;
+import it.gloria.client.event.AddFlashCardEvent;
+import it.gloria.client.event.EditFlashCardEvent;
+import it.gloria.shared.FlashCard;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -9,16 +17,12 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
 
-import it.gloria.client.FlashCardServiceAsync;
-import it.gloria.shared.FlashCard;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class FlashCardsPresenter implements Presenter {  
 
   private List<FlashCard> flashCardList;
 
+  
+  // the widget in the screen
   public interface Display {
     HasClickHandlers getAddButton();
     HasClickHandlers getDeleteButton();
@@ -26,8 +30,11 @@ public class FlashCardsPresenter implements Presenter {
     void setData(List<String> data);
     int getClickedItem(ClickEvent event);
     List<Integer> getSelectedRows();
-    Widget asWidget();
+    Widget asWidget();	
   }
+  
+  
+  
   
   private final FlashCardServiceAsync rpcService;
   private final HandlerManager eventBus;
@@ -39,26 +46,29 @@ public class FlashCardsPresenter implements Presenter {
     this.display = view;
   }
   
+  
+  // bind 
   public void bind() {
+	  
     display.getAddButton().addClickHandler(new ClickHandler() {   
       public void onClick(ClickEvent event) {
-        eventBus.fireEvent(new AddContactEvent());
+        eventBus.fireEvent(new AddFlashCardEvent());
       }
     });
 
     display.getDeleteButton().addClickHandler(new ClickHandler() {   
       public void onClick(ClickEvent event) {
-        deleteSelectedContacts();
+        deleteSelectedFlashCards();
       }
     });
     
     display.getList().addClickHandler(new ClickHandler() {
       public void onClick(ClickEvent event) {
-        int selectedRow = display.getClickedRow(event);
+        int selectedItem = display.getClickedItem(event);
         
-        if (selectedRow >= 0) {
-          String id = flashCardList.get(selectedRow).getId();
-          eventBus.fireEvent(new EditContactEvent(id));
+        if (selectedItem >= 0) {
+          Long id = flashCardList.get(selectedItem).getIdKey();
+          eventBus.fireEvent(new EditFlashCardEvent(id));
         }
       }
     });
@@ -88,34 +98,49 @@ public class FlashCardsPresenter implements Presenter {
     }
   }
 
-  public void setflashCardList(List<flashCardList> flashCardList) {
+  public void setflashCardList(List<FlashCard> flashCardList) {
     this.flashCardList = flashCardList;
   }
   
-  public flashCardList getContactDetail(int index) {
+  public FlashCard getFlashCardDetail(int index) {
     return flashCardList.get(index);
   }
   
   private void fetchflashCardList() {
-    rpcService;
+    rpcService.listFlashCards(new AsyncCallback<ArrayList<FlashCard>>() {
+		
+		@Override
+		public void onSuccess(ArrayList<FlashCard> result) {
+			// TODO Auto-generated method stub
+			flashCardList = result;
+			
+		}
+		
+		@Override
+		public void onFailure(Throwable caught) {
+			// TODO Auto-generated method stub
+			
+		}
+	});
+    
   }
 
-  private void deleteSelectedContacts() {
+  private void deleteSelectedFlashCards() {
     List<Integer> selectedRows = display.getSelectedRows();
-    ArrayList<String> ids = new ArrayList<String>();
+    ArrayList<Long> ids = new ArrayList<Long>();
     
     for (int i = 0; i < selectedRows.size(); ++i) {
-      ids.add(flashCardList.get(selectedRows.get(i)).getId());
+      ids.add(flashCardList.get(selectedRows.get(i)).getIdKey());
     }
     
-    rpcService.deleteContacts(ids, new AsyncCallback<ArrayList<flashCardList>>() {
-      public void onSuccess(ArrayList<flashCardList> result) {
+    rpcService.deleteFlashCards(ids, new AsyncCallback<ArrayList<FlashCard>>() {
+      public void onSuccess(ArrayList<FlashCard> result) {
         flashCardList = result;
         sortflashCardList();
         List<String> data = new ArrayList<String>();
 
         for (int i = 0; i < result.size(); ++i) {
-          data.add(flashCardList.get(i).getDisplayName());
+          data.add(flashCardList.get(i).getEngCaption());
         }
         
         display.setData(data);
@@ -123,7 +148,7 @@ public class FlashCardsPresenter implements Presenter {
       }
       
       public void onFailure(Throwable caught) {
-        Window.alert("Error deleting selected contacts");
+        Window.alert("Error deleting selected FlashCards");
       }
     });
   }

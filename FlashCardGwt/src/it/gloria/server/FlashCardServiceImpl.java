@@ -76,4 +76,10 @@ public class FlashCardServiceImpl extends RemoteServiceServlet implements
 		return null;
 	}
 
+	@Override
+	public FlashCard getFlashCard(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

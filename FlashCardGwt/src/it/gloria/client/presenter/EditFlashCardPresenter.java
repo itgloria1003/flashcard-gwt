@@ -1,6 +1,7 @@
 package it.gloria.client.presenter;
 
 import it.gloria.client.FlashCardServiceAsync;
+import it.gloria.client.event.EditFlashCardCancelledEvent;
 import it.gloria.client.event.FlashCardUpdatedEvent;
 import it.gloria.shared.FlashCard;
 
@@ -15,40 +16,34 @@ import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
 
 public class EditFlashCardPresenter implements Presenter{  
-  public interface Display {
+  
+ public interface Display {
     HasClickHandlers getSaveButton();
     HasClickHandlers getCancelButton();
-    HasValue<String> getFirstName();
-    HasValue<String> getLastName();
-    HasValue<String> getEmailAddress();
+    HasValue<String> getChinCaption();
+    HasValue<String> getEngCaption();
     Widget asWidget();
   }
   
   private FlashCard flashCard;
   private final FlashCardServiceAsync rpcService;
   private final HandlerManager eventBus;
-  private final Display display;
+  private final Display displayComponent;
   
-  public EditFlashCardPresenter(FlashCardServiceAsync rpcService, HandlerManager eventBus, Display display) {
+  
+  
+  
+  public EditFlashCardPresenter(FlashCardServiceAsync rpcService, HandlerManager eventBus, Display display, Long idKey) {
     this.rpcService = rpcService;
     this.eventBus = eventBus;
-    this.flashCard = new FlashCard();
-    this.display = display;
-    bind();
-  }
-  
-  public EditFlashCardPresenter(FlashCardServiceAsync rpcService, HandlerManager eventBus, Display display, String id) {
-    this.rpcService = rpcService;
-    this.eventBus = eventBus;
-    this.display = display;
+    this.displayComponent = display;
     bind();
     
-    rpcService.getFlashCard(id, new AsyncCallback<FlashCard>() {
+    rpcService.getFlashCard(idKey, new AsyncCallback<FlashCard>() {
       public void onSuccess(FlashCard result) {
         flashCard = result;
-        EditFlashCardPresenter.this.display.getFirstName().setValue(flashCard.getFirstName());
-        EditFlashCardPresenter.this.display.getLastName().setValue(flashCard.getLastName());
-        EditFlashCardPresenter.this.display.getEmailAddress().setValue(flashCard.getEmailAddress());
+        EditFlashCardPresenter.this.displayComponent.getChinCaption().setValue(flashCard.getChinCaption());
+        EditFlashCardPresenter.this.displayComponent.getEngCaption().setValue(flashCard.getEngCaption());
       }
       
       public void onFailure(Throwable caught) {
@@ -59,13 +54,13 @@ public class EditFlashCardPresenter implements Presenter{
   }
   
   public void bind() {
-    this.display.getSaveButton().addClickHandler(new ClickHandler() {   
+    this.displayComponent.getSaveButton().addClickHandler(new ClickHandler() {   
       public void onClick(ClickEvent event) {
         doSave();
       }
     });
 
-    this.display.getCancelButton().addClickHandler(new ClickHandler() {   
+    this.displayComponent.getCancelButton().addClickHandler(new ClickHandler() {   
       public void onClick(ClickEvent event) {
         eventBus.fireEvent(new EditFlashCardCancelledEvent());
       }
@@ -74,13 +69,14 @@ public class EditFlashCardPresenter implements Presenter{
 
   public void go(final HasWidgets container) {
     container.clear();
-    container.add(display.asWidget());
+    container.add(displayComponent.asWidget());
   }
 
   private void doSave() {
-    flashCard.setFirstName(display.getFirstName().getValue());
-    flashCard.setLastName(display.getLastName().getValue());
-    flashCard.setEmailAddress(display.getEmailAddress().getValue());
+	  
+	  // to be replace by 
+	flashCard.setEngCaption(displayComponent.getEngCaption().getValue());
+	flashCard.setChinCaption(displayComponent.getChinCaption().getValue());
     
     rpcService.updateFlashCard(flashCard, new AsyncCallback<FlashCard>() {
         public void onSuccess(FlashCard result) {

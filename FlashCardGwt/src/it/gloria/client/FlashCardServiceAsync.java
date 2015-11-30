@@ -14,6 +14,7 @@ public interface FlashCardServiceAsync {
 	void getBlobstoreUploadUrl(AsyncCallback<String> callback);
 
 	void listFlashCards(AsyncCallback<ArrayList<FlashCard>> callback);
+	
 
 
 	void deleteCard(FlashCard card, AsyncCallback<String> callback);
@@ -25,6 +26,9 @@ public interface FlashCardServiceAsync {
 
 	void updateFlashCard(FlashCard flashCard,
 			AsyncCallback<FlashCard> asyncCallback);
+
+
+	void getFlashCard(Long id, AsyncCallback<FlashCard> asyncCallback);
 
 
 }

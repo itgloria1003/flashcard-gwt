@@ -4,7 +4,7 @@ import it.gloria.shared.FlashCard;
 
 import com.google.gwt.event.shared.GwtEvent;
 
-public class FlashCardUpdatedEvent extends GwtEvent<FlashCardEventHandler> {
+public class FlashCardUpdatedEvent extends GwtEvent<FlashCardUpdatedEventHandler> {
 	private FlashCard card ;
 	
 	public FlashCardUpdatedEvent(FlashCard card){
@@ -15,15 +15,15 @@ public class FlashCardUpdatedEvent extends GwtEvent<FlashCardEventHandler> {
 		return card;
 	}
 
-	public static Type<FlashCardEventHandler> TYPE = new Type<FlashCardEventHandler>();
+	public static Type<FlashCardUpdatedEventHandler> TYPE = new Type<FlashCardUpdatedEventHandler>();
 
 	@Override
-	public com.google.gwt.event.shared.GwtEvent.Type<FlashCardEventHandler> getAssociatedType() {
+	public com.google.gwt.event.shared.GwtEvent.Type<FlashCardUpdatedEventHandler> getAssociatedType() {
 		return TYPE;
 	}
 
 	@Override
-	protected void dispatch(FlashCardEventHandler handler) {
+	protected void dispatch(FlashCardUpdatedEventHandler handler) {
 		 handler.onFlashCardUpdated(this);
 	}
 }

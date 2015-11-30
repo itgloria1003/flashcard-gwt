@@ -18,5 +18,6 @@ public interface FlashCardService extends RemoteService {
 	String deleteCard(FlashCard card);
 	ArrayList<FlashCard> deleteFlashCards(ArrayList<Long> ids);
 	FlashCard updateFlashCard(FlashCard flashCard);
+	FlashCard getFlashCard(Long id);
 	
 }

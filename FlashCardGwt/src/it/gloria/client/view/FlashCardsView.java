@@ -15,7 +15,7 @@ import com.google.gwt.user.client.ui.HTMLTable;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class FlashCardsView extends Composite implements flash {
+public class FlashCardsView extends Composite implements FlashCardsPresenter.Display {
   private final Button addButton;
   private final Button deleteButton;
   private FlexTable contactsTable;

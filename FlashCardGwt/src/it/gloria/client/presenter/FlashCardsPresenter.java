@@ -12,7 +12,6 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.shared.HandlerManager;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
@@ -30,6 +29,7 @@ public class FlashCardsPresenter implements Presenter {
     void setData(List<String> data);
     int getClickedItem(ClickEvent event);
     List<Integer> getSelectedRows();
+    void promptMessage(String message);
     Widget asWidget();	
   }
   
@@ -89,8 +89,8 @@ public class FlashCardsPresenter implements Presenter {
     //
     for (int i = 0; i < flashCardList.size(); ++i) {
       for (int j = 0; j < flashCardList.size() - 1; ++j) {
-        if (flashCardList.get(j).getDisplayName().compareToIgnoreCase(flashCardList.get(j + 1).getDisplayName()) >= 0) {
-          flashCardList tmp = flashCardList.get(j);
+        if (flashCardList.get(j).getEngCaption().compareToIgnoreCase(flashCardList.get(j + 1).getEngCaption()) >= 0) {
+          FlashCard tmp = flashCardList.get(j);
           flashCardList.set(j, flashCardList.get(j + 1));
           flashCardList.set(j + 1, tmp);
         }
@@ -111,14 +111,13 @@ public class FlashCardsPresenter implements Presenter {
 		
 		@Override
 		public void onSuccess(ArrayList<FlashCard> result) {
-			// TODO Auto-generated method stub
 			flashCardList = result;
 			
 		}
 		
 		@Override
 		public void onFailure(Throwable caught) {
-			// TODO Auto-generated method stub
+			display.promptMessage("Exception found during fetching...");
 			
 		}
 	});
@@ -148,7 +147,7 @@ public class FlashCardsPresenter implements Presenter {
       }
       
       public void onFailure(Throwable caught) {
-        Window.alert("Error deleting selected FlashCards");
+    	  display.promptMessage("Exception found during fetching...");
       }
     });
   }

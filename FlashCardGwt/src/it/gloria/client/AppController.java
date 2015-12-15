@@ -21,7 +21,10 @@ import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.HasWidgets;
 
 public class AppController implements Presenter, ValueChangeHandler<String> {
-  private final HandlerManager eventBus;
+  private static final String ACTION_EDIT = "edit";
+private static final String ACTION_ADD = "add";
+private static final String ACTION_LIST = "list";
+private final HandlerManager eventBus;
   private final FlashCardServiceAsync rpcService; 
   private HasWidgets container;
   
@@ -31,7 +34,11 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
     bind();
   }
   
+  
+  // set the history and add the event 
   private void bind() {
+	  
+	  
     History.addValueChangeHandler(this);
 
     eventBus.addHandler(AddFlashCardEvent.TYPE,
@@ -64,28 +71,28 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
   }
   
   private void doAddNewFlashCard() {
-    History.newItem("add");
+    History.newItem(ACTION_ADD);
   }
   
-  private void doEditFlashCard(String id) {
-    History.newItem("edit", false);
+  private void doEditFlashCard(Long id) {
+    History.newItem(ACTION_EDIT, false);
     Presenter presenter = new EditFlashCardPresenter(rpcService, eventBus, new EditFlashCardView(), id);
     presenter.go(container);
   }
   
   private void doEditFlashCardCancelled() {
-    History.newItem("list");
+    History.newItem(ACTION_LIST);
   }
   
   private void doFlashCardUpdated() {
-    History.newItem("list");
+    History.newItem(ACTION_LIST);
   }
   
   public void go(final HasWidgets container) {
     this.container = container;
     
     if ("".equals(History.getToken())) {
-      History.newItem("list");
+      History.newItem(ACTION_LIST);
     }
     else {
       History.fireCurrentHistoryState();
@@ -98,14 +105,14 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
     if (token != null) {
       Presenter presenter = null;
 
-      if (token.equals("list")) {
+      if (token.equals(ACTION_LIST)) {
         presenter = new FlashCardsPresenter(rpcService, eventBus, new FlashCardsView());
       }
-      else if (token.equals("add")) {
-        presenter = new EditFlashCardPresenter(rpcService, eventBus, new EditFlashCardView());
+      else if (token.equals(ACTION_ADD)) {
+        presenter = new EditFlashCardPresenter(rpcService, eventBus, new EditFlashCardView(), null);
       }
-      else if (token.equals("edit")) {
-        presenter = new EditFlashCardPresenter(rpcService, eventBus, new EditFlashCardView());
+      else if (token.equals(ACTION_EDIT)) {
+        presenter = new EditFlashCardPresenter(rpcService, eventBus, new EditFlashCardView(), null);
       }
       
       if (presenter != null) {

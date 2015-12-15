@@ -2,7 +2,6 @@ package it.gloria.client.presenter;
 
 import it.gloria.client.FlashCardServiceAsync;
 import it.gloria.client.event.AddFlashCardEvent;
-import it.gloria.client.event.EditFlashCardEvent;
 import it.gloria.shared.FlashCard;
 
 import java.util.ArrayList;
@@ -25,9 +24,9 @@ public class FlashCardsPresenter implements Presenter {
   public interface Display {
     HasClickHandlers getAddButton();
     HasClickHandlers getDeleteButton();
-    HasClickHandlers getList();
+//    HasClickHandlers getContentList();
     void setData(List<String> data);
-    int getClickedItem(ClickEvent event);
+//    int getClickedItem(ClickEvent event);
     List<Integer> getSelectedRows();
     void promptMessage(String message);
     Widget asWidget();	
@@ -62,16 +61,16 @@ public class FlashCardsPresenter implements Presenter {
       }
     });
     
-    display.getList().addClickHandler(new ClickHandler() {
-      public void onClick(ClickEvent event) {
-        int selectedItem = display.getClickedItem(event);
-        
-        if (selectedItem >= 0) {
-          Long id = flashCardList.get(selectedItem).getIdKey();
-          eventBus.fireEvent(new EditFlashCardEvent(id));
-        }
-      }
-    });
+//    display.getContentList().addClickHandler(new ClickHandler() {
+//      public void onClick(ClickEvent event) {
+//        int selectedItem = display.getClickedItem(event);
+//        
+//        if (selectedItem >= 0) {
+//          Long id = flashCardList.get(selectedItem).getIdKey();
+//          eventBus.fireEvent(new EditFlashCardEvent(id));
+//        }
+//      }
+//    });
   }
   
   public void go(final HasWidgets container) {

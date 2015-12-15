@@ -39,17 +39,19 @@ public class EditFlashCardPresenter implements Presenter{
     this.displayComponent = display;
     bind();
     
-    rpcService.getFlashCard(idKey, new AsyncCallback<FlashCard>() {
-      public void onSuccess(FlashCard result) {
-        flashCard = result;
-        EditFlashCardPresenter.this.displayComponent.getChinCaption().setValue(flashCard.getChinCaption());
-        EditFlashCardPresenter.this.displayComponent.getEngCaption().setValue(flashCard.getEngCaption());
-      }
-      
-      public void onFailure(Throwable caught) {
-        Window.alert("Error retrieving FlashCard");
-      }
-    });
+    if (idKey!=null){
+	    rpcService.getFlashCard(idKey, new AsyncCallback<FlashCard>() {
+	      public void onSuccess(FlashCard result) {
+	        flashCard = result;
+	        EditFlashCardPresenter.this.displayComponent.getChinCaption().setValue(flashCard.getChinCaption());
+	        EditFlashCardPresenter.this.displayComponent.getEngCaption().setValue(flashCard.getEngCaption());
+	      }
+	      
+	      public void onFailure(Throwable caught) {
+	        Window.alert("Error retrieving FlashCard");
+	      }
+	    });
+    }
     
   }
   

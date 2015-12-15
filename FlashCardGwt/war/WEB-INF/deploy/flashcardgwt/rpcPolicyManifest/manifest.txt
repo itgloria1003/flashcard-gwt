@@ -1,3 +1,3 @@
 # Module flashcardgwt
 # RPC service class, partial path of RPC policy file
-it.gloria.client.FlashCardService, 08E07E5BB2B3C0B3FFF353C5B1D2A464.gwt.rpc
+it.gloria.client.FlashCardService, 4939A81B3D67239A956C9BFE8AB57089.gwt.rpc
